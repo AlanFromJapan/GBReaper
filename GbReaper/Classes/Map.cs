@@ -92,9 +92,11 @@ namespace GbReaper.Classes {
         }
 
         private void RegisterTileChangeHandler(Tile pTile) {
-            //trick to avoid multiple registration on the same instance (always ok to unregister)
-            pTile.TileChanged -= new Tile.TileChangeDelegate(TileChangedHandler);
-            pTile.TileChanged += new Tile.TileChangeDelegate(TileChangedHandler);
+            if (pTile != null) {
+                //trick to avoid multiple registration on the same instance (always ok to unregister)
+                pTile.TileChanged -= new Tile.TileChangeDelegate(TileChangedHandler);
+                pTile.TileChanged += new Tile.TileChangeDelegate(TileChangedHandler);
+            }
         }
 
         protected void TileChangedHandler(Tile pTile) {

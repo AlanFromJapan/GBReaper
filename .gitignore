@@ -54,3 +54,4 @@ dkms.conf
 **/bin/
 **/obj/
 !GbReaper/Binaries/GbReaper.exe
+*.zip

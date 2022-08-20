@@ -48,13 +48,27 @@ namespace GbReaper.Classes {
 
         public static void DrawGrid(Graphics pG, Rectangle pR, Pen pPen, int pDivideH, int pDivideV) {
 
+            Pen altPen = (Pen)pPen.Clone();
+            //altPen.Color = Color.FromArgb(altPen.Color.R +40, altPen.Color.G +40, altPen.Color.B +40);
+            altPen.Color = Color.WhiteSmoke;
+
             for (int x = 0; x < pDivideH-1; x++) {
-                pG.DrawLine(pPen, pR.Left + (x + 1) * pR.Width / pDivideH, pR.Top + 0, pR.Left + (x + 1) * pR.Width / pDivideH, pR.Top + pR.Height);
+                Pen p = pPen;
+                if (x == pDivideH / 2 -1)
+                    p = altPen;
+
+                pG.DrawLine(p, pR.Left + (x + 1) * pR.Width / pDivideH, pR.Top + 0, pR.Left + (x + 1) * pR.Width / pDivideH, pR.Top + pR.Height);
             }
 
             for (int y = 0; y < pDivideV-1; y++) {
-                pG.DrawLine(pPen, pR.Left + 0, pR.Top + (y + 1) * pR.Height / pDivideV, pR.Left + pR.Width, pR.Top + (y + 1) * pR.Height / pDivideV);
+                Pen p = pPen;
+                if (y == pDivideV / 2 - 1)
+                    p = altPen;
+
+                pG.DrawLine(p, pR.Left + 0, pR.Top + (y + 1) * pR.Height / pDivideV, pR.Left + pR.Width, pR.Top + (y + 1) * pR.Height / pDivideV);
             }
+
+            altPen.Dispose();
         }
 
 
