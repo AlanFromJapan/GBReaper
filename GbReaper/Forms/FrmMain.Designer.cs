@@ -29,6 +29,7 @@
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.loadProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
@@ -68,7 +69,6 @@
             this.stripLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.ofdProject = new System.Windows.Forms.OpenFileDialog();
             this.fbdExport = new System.Windows.Forms.FolderBrowserDialog();
-            this.reloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panMain.SuspendLayout();
             this.tabMaps.SuspendLayout();
@@ -132,6 +132,14 @@
             this.loadProjectToolStripMenuItem.Text = "Load project";
             this.loadProjectToolStripMenuItem.Click += new System.EventHandler(this.loadProjectToolStripMenuItem_Click);
             // 
+            // reloadToolStripMenuItem
+            // 
+            this.reloadToolStripMenuItem.Name = "reloadToolStripMenuItem";
+            this.reloadToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F7;
+            this.reloadToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.reloadToolStripMenuItem.Text = "Reload";
+            this.reloadToolStripMenuItem.Click += new System.EventHandler(this.reloadToolStripMenuItem_Click);
+            // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
@@ -193,7 +201,7 @@
             this.horizontalToVerticalWhenROMImportBy4ToolStripMenuItem.CheckOnClick = true;
             this.horizontalToVerticalWhenROMImportBy4ToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.horizontalToVerticalWhenROMImportBy4ToolStripMenuItem.Name = "horizontalToVerticalWhenROMImportBy4ToolStripMenuItem";
-            this.horizontalToVerticalWhenROMImportBy4ToolStripMenuItem.Size = new System.Drawing.Size(310, 22);
+            this.horizontalToVerticalWhenROMImportBy4ToolStripMenuItem.Size = new System.Drawing.Size(311, 22);
             this.horizontalToVerticalWhenROMImportBy4ToolStripMenuItem.Text = "Horizontal to Vertical when ROM import by 4";
             // 
             // askTileNameOnImportToolStripMenuItem
@@ -202,7 +210,7 @@
             this.askTileNameOnImportToolStripMenuItem.CheckOnClick = true;
             this.askTileNameOnImportToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.askTileNameOnImportToolStripMenuItem.Name = "askTileNameOnImportToolStripMenuItem";
-            this.askTileNameOnImportToolStripMenuItem.Size = new System.Drawing.Size(310, 22);
+            this.askTileNameOnImportToolStripMenuItem.Size = new System.Drawing.Size(311, 22);
             this.askTileNameOnImportToolStripMenuItem.Text = "Ask tile name on import";
             // 
             // allowImportOfDuplicateToolStripMenuItem
@@ -211,7 +219,7 @@
             this.allowImportOfDuplicateToolStripMenuItem.CheckOnClick = true;
             this.allowImportOfDuplicateToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.allowImportOfDuplicateToolStripMenuItem.Name = "allowImportOfDuplicateToolStripMenuItem";
-            this.allowImportOfDuplicateToolStripMenuItem.Size = new System.Drawing.Size(310, 22);
+            this.allowImportOfDuplicateToolStripMenuItem.Size = new System.Drawing.Size(311, 22);
             this.allowImportOfDuplicateToolStripMenuItem.Text = "Allow import of duplicate";
             // 
             // exportToolStripMenuItem
@@ -222,36 +230,34 @@
             this.generateStubMaincToolStripMenuItem,
             this.exportGridOnTheMapsToolStripMenuItem});
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(53, 23);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(52, 23);
             this.exportToolStripMenuItem.Text = "&Export";
             // 
             // exportForGBDKToolStripMenuItem
             // 
             this.exportForGBDKToolStripMenuItem.Name = "exportForGBDKToolStripMenuItem";
             this.exportForGBDKToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.exportForGBDKToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.exportForGBDKToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.exportForGBDKToolStripMenuItem.Text = "Export for GBDK";
             this.exportForGBDKToolStripMenuItem.Click += new System.EventHandler(this.exportForGBDKToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(198, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(197, 6);
             // 
             // generateStubMaincToolStripMenuItem
             // 
             this.generateStubMaincToolStripMenuItem.CheckOnClick = true;
             this.generateStubMaincToolStripMenuItem.Name = "generateStubMaincToolStripMenuItem";
-            this.generateStubMaincToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.generateStubMaincToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.generateStubMaincToolStripMenuItem.Text = "Generate stub main.c";
             // 
             // exportGridOnTheMapsToolStripMenuItem
             // 
-            this.exportGridOnTheMapsToolStripMenuItem.Checked = true;
             this.exportGridOnTheMapsToolStripMenuItem.CheckOnClick = true;
-            this.exportGridOnTheMapsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.exportGridOnTheMapsToolStripMenuItem.Name = "exportGridOnTheMapsToolStripMenuItem";
-            this.exportGridOnTheMapsToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.exportGridOnTheMapsToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.exportGridOnTheMapsToolStripMenuItem.Text = "Export grid on the maps";
             // 
             // toolsToolStripMenuItem
@@ -259,7 +265,7 @@
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.removeUnusedTilesToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 23);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 23);
             this.toolsToolStripMenuItem.Text = "&Tools";
             // 
             // removeUnusedTilesToolStripMenuItem
@@ -390,13 +396,13 @@
             // lblRomMemo
             // 
             this.lblRomMemo.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lblRomMemo.Font = new System.Drawing.Font("Segoe UI Black", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRomMemo.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRomMemo.Location = new System.Drawing.Point(0, 625);
             this.lblRomMemo.Name = "lblRomMemo";
             this.lblRomMemo.Size = new System.Drawing.Size(252, 42);
             this.lblRomMemo.TabIndex = 5;
             this.lblRomMemo.Text = "Double click to add 1 to library, [Ctrl] to import 4 in crossed order, [Shift] to" +
-    " import up to 255";
+                " import up to 255";
             this.lblRomMemo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panLeftBottom
@@ -456,14 +462,6 @@
             // fbdExport
             // 
             this.fbdExport.Description = "Choose path to export";
-            // 
-            // reloadToolStripMenuItem
-            // 
-            this.reloadToolStripMenuItem.Name = "reloadToolStripMenuItem";
-            this.reloadToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F7;
-            this.reloadToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.reloadToolStripMenuItem.Text = "Reload";
-            this.reloadToolStripMenuItem.Click += new System.EventHandler(this.reloadToolStripMenuItem_Click);
             // 
             // FrmMain
             // 
