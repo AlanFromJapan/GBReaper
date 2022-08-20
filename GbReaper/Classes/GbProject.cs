@@ -36,7 +36,14 @@ namespace GbReaper.Classes {
             pMap.ParentProject = null;
         }
 
-        public void ExportToGBDK(string pPath, bool pGenerateStubMain, bool pGridOnMaps) {
+        /// <summary>
+        /// Exports the library and maps to C files
+        /// </summary>
+        /// <param name="pPath"></param>
+        /// <param name="pGenerateStubMain"></param>
+        /// <param name="pGridOnMaps"></param>
+        /// <param name="pRemoveUnusedTiles"></param>
+        public void ExportToGBDK(string pPath, bool pGenerateStubMain, bool pGridOnMaps, bool pRemoveUnusedTiles) {
             foreach (Library vLin in mLibraries) {
                 vLin.ExportToGBDK(pPath);
                 vLin.ExportToPNG(pPath);

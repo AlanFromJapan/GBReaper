@@ -13,6 +13,8 @@ using GbReaper.Forms;
 
 namespace GbReaper.Controls {
     public partial class UcLibraryList : UserControl {
+        protected const int INDEX_LABEL_XOFFSET = 22;
+
         private Library mCurrentLib = null;
 
         public delegate void SelectedTileChangedDelegate(Tile pS);
@@ -128,10 +130,14 @@ namespace GbReaper.Controls {
                 }
 
                 TileViewItem vSVI = (TileViewItem)e.Item;
-                e.Graphics.DrawImage(vSVI.mTile.Image, e.Bounds.Location.X, e.Bounds.Location.Y, Tile.WIDTH_PX*2, Tile.HEIGHT_PX*2);
+                int x = e.Bounds.Location.X + 2;
+                e.Graphics.DrawString(e.ItemIndex.ToString(), lvLibrary.Font, Brushes.Gray, (float)x, e.Bounds.Location.Y);
+                x += INDEX_LABEL_XOFFSET;
+
+                e.Graphics.DrawImage(vSVI.mTile.Image, x, e.Bounds.Location.Y, Tile.WIDTH_PX*2, Tile.HEIGHT_PX*2);
 
                 Rectangle vR = new Rectangle(e.Bounds.Location, e.Bounds.Size);
-                vR.Offset(Tile.WIDTH_PX * 2, 0);
+                vR.Offset(INDEX_LABEL_XOFFSET + Tile.WIDTH_PX * 2 + 2, 0);
                 e.Graphics.DrawString(
                     (string.IsNullOrEmpty(vSVI.mTile.Name) ? vSVI.mTile.UID.ToString() : vSVI.mTile.Name), 
                     lvLibrary.Font,
@@ -221,6 +227,19 @@ namespace GbReaper.Controls {
         protected void OnSelectedTileChanged() {
             if (SelectedTileChanged != null && lvLibrary.SelectedItems.Count > 0) {
                 SelectedTileChanged(((TileViewItem)lvLibrary.SelectedItems[0]).mTile);
+
+                PanelX[] pans = {panLast1, panLast2, panLast3, panLast4, panLast5};
+
+                //pass around and store the Tile in Tag member
+                for (int i = pans.Length - 1; i > 0; i--) {
+                    pans[i].Tag = pans[i - 1].Tag;
+                }
+                panLast1.Tag = ((TileViewItem)lvLibrary.SelectedItems[0]).mTile;
+
+                //fore redraw
+                foreach (PanelX pan in pans) {
+                    pan.Invalidate();
+                }
             }
         }
 
@@ -381,6 +400,51 @@ namespace GbReaper.Controls {
             if (lviReorderingTile != null) {
                 lviReorderingTarget = lvLibrary.GetItemAt(e.X, e.Y);
             }
+        }
+
+        /// <summary>
+        /// Sets the currently selected tile (after a pick for instance)
+        /// </summary>
+        /// <param name="pTile"></param>
+        public void SetSelectedTile(Tile pTile) { 
+            //assuming the tile is in the lib, otherwise error?
+            
+            //unselect current
+            lvLibrary.SelectedItems.Clear();
+
+            //find the tile if it's here
+            foreach (ListViewItem v in lvLibrary.Items) {
+                Tile vT = ((TileViewItem)v).mTile;
+                if (vT == pTile) {
+                    //found: selected and finished
+                    v.Selected = true;
+                    lvLibrary.EnsureVisible(v.Index);
+                    break;
+                }
+            }            
+        }
+
+
+        /// <summary>
+        /// OnPaint, redraw with the associated Tile (in the Tag)
+        /// SAME CALLBACK for all the panels.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void panLast1_Paint(object sender, PaintEventArgs e) {
+            DrawingLogic.ScaledAndTiledPaintBackground(
+                (((Control)sender).Tag == null ? null : ((Tile)(((Control)sender).Tag)).Image),
+                e,
+                new Rectangle(new Point(0, 0), ((Control)sender).Size),
+                1
+            );
+        }
+
+        private void panLast1_Click(object sender, EventArgs e) {
+            if (((Control)sender).Tag == null)
+                return;
+
+            SetSelectedTile(((Tile)(((Control)sender).Tag)));
         }
     }
 }

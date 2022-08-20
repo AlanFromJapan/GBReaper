@@ -22,6 +22,7 @@ namespace GbReaper.Controls {
         public delegate void RomTileSelectDelegate(Image pImage);
         public delegate void RomTileSelectMulitpleDelegate(IList<Image> pImages);
         public event RomTileSelectDelegate RomTileSelected;
+        public event RomTileSelectMulitpleDelegate RomTileSelected4;
         public event RomTileSelectMulitpleDelegate RomTileSelectedMultiple;
         public event RomTileSelectDelegate RomTileViewed;
 
@@ -126,11 +127,19 @@ namespace GbReaper.Controls {
             if (this.RomTileSelected != null) {
                 this.RomTileSelected(pImg);
             }
+
+            if (this.RomTileSelected4 != null) {
+                this.RomTileSelected4(GetSelectedNBitmaps(4));
+            }
         }
 
         protected void OnRomTileViewed(Image pImg) {
             if (this.RomTileViewed != null) {
                 this.RomTileViewed(pImg);
+            }
+
+            if (this.RomTileSelected4 != null) {
+                this.RomTileSelected4(GetSelectedNBitmaps(4));
             }
         }
 

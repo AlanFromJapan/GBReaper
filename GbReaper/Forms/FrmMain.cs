@@ -40,12 +40,42 @@ namespace GbReaper {
             //Event handlers
             ucRomViewer1.RomTileViewed += new GbReaper.Controls.UcRomViewer.RomTileSelectDelegate(RomViewer_RomTileViewed);
             ucRomViewer1.RomTileSelectedMultiple += UcRomViewer1_RomTileSelectedMultiple;
+            ucRomViewer1.RomTileSelected4 += new UcRomViewer.RomTileSelectMulitpleDelegate(ucRomViewer1_RomTileSelected4);
             this.ucRomViewer1.RomTileSelected += new GbReaper.Controls.UcRomViewer.RomTileSelectDelegate(RomViewer_RomTileSelected);
             this.ucLibView.SelectedTileChanged += new GbReaper.Controls.UcLibraryList.SelectedTileChangedDelegate(LibView_SelectedTileChanged);
             this.ucLibView.TilesDeleted += UcLibView_TilesDeleted;
+            
 
             pan32.Paint += new PaintEventHandler(pan32_Paint);
             pan128Alt.Paint += new PaintEventHandler(pan128Alt_Paint);
+
+
+        }
+
+        /// <summary>
+        /// When picking a rom tile, this shows the possible sprite it belongs to
+        /// </summary>
+        /// <param name="pImages"></param>
+        void ucRomViewer1_RomTileSelected4(IList<Image> pImages) {
+            /**
+             * Got 4 tiles ABCD, 
+             * Present them as AB
+             *                 CD
+             * 
+             */
+            Bitmap b = new Bitmap(16, 16);
+            Bitmap b2 = new Bitmap(32, 32);
+            using (Graphics g = Graphics.FromImage(b)) {
+                g.DrawImageUnscaled(pImages[0], 0, 0);
+                g.DrawImageUnscaled(pImages[1], 8, 0);
+                g.DrawImageUnscaled(pImages[2], 0, 8);
+                g.DrawImageUnscaled(pImages[3], 8, 8);
+            }
+            using (Graphics g2 = Graphics.FromImage(b2)) {
+                g2.DrawImage(b, 0, 0, 32, 32);
+            }
+            
+            pan4RomTiles.BackgroundImage = b2;
 
 
         }
@@ -115,7 +145,7 @@ namespace GbReaper {
             foreach (Map vM in this.mCurrentProject.mMaps) {
 
                 TabPage vTP = new TabPage(vM.Name);
-                UcMapEditor vME = new UcMapEditor();
+                UcMapEditor vME = new UcMapEditor(this.ucLibView);
                 vME.CurrentMap = vM;
                 vME.CurrentTile = ucLibView.SelectedTile;
                 vME.LibraryList = this.ucLibView;
@@ -153,7 +183,7 @@ namespace GbReaper {
                     this.mCurrentProject.AddMap(vNew);
 
                     TabPage vTP = new TabPage(vNew.Name);
-                    UcMapEditor vME = new UcMapEditor();
+                    UcMapEditor vME = new UcMapEditor(this.ucLibView);
                     vME.CurrentMap = vNew;
                     vME.CurrentTile = ucLibView.SelectedTile;
                     vME.LibraryList = this.ucLibView;
@@ -291,8 +321,8 @@ namespace GbReaper {
             }
 
             if (fbdExport.ShowDialog(this) == System.Windows.Forms.DialogResult.OK) {
-                this.mCurrentProject.ExportToGBDK(fbdExport.SelectedPath, generateStubMaincToolStripMenuItem.Checked, exportGridOnTheMapsToolStripMenuItem.Checked);
-                SetStatus("Export to " + fbdExport.SelectedPath + " completed.");
+                this.mCurrentProject.ExportToGBDK(fbdExport.SelectedPath, generateStubMaincToolStripMenuItem.Checked, exportGridOnTheMapsToolStripMenuItem.Checked, removeUnusedTilesToolStripMenuItem.Checked);
+                SetStatus("Export to " + fbdExport.SelectedPath + " completed at " + DateTime.Now.TimeOfDay.ToString());
             }
         }
 
@@ -332,6 +362,14 @@ namespace GbReaper {
 
                 SetStatus("Reloaded.");
             }
+        }
+
+        private void removeUnusedTilesToolStripMenuItem1_Click(object sender, EventArgs e) {
+            MessageBox.Show("TODO!");
+        }
+
+        private void pan4RomTiles_Paint(object sender, PaintEventArgs e) {
+
         }
     }
 }

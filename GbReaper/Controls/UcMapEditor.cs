@@ -12,7 +12,8 @@ using FloydSteinberg;
 
 namespace GbReaper.Controls {
     public partial class UcMapEditor : UserControl {
-        public const int TILE_SIZE = Tile.HEIGHT_PX * 3;
+        public const int TILE_ZOOM_FACTOR = 3;
+        public const int TILE_SIZE = Tile.HEIGHT_PX * TILE_ZOOM_FACTOR;
 
         protected enum GridMode { Background, Foreground, None }
         protected GridMode mGridMode = GridMode.Background;
@@ -68,9 +69,15 @@ namespace GbReaper.Controls {
         public event EventHandler NewMap;
         public event EventHandler DuplicateMap;
 
+        /// <summary>
+        /// THE library used so we can call it back
+        /// </summary>
+        protected UcLibraryList uclibLibrary = null;
 
-        public UcMapEditor() {
+        public UcMapEditor(UcLibraryList pLib) {
             InitializeComponent();
+
+            this.uclibLibrary = pLib;
 
             panMap.Paint += new PaintEventHandler(panMap_Paint);
             panMap.MouseDown += new MouseEventHandler(panMap_MouseDown);
@@ -125,14 +132,28 @@ namespace GbReaper.Controls {
                     else {
                         //1 cell at a time
                         if (!mFillMode) {
-                            //REGULAR PAINT cell by cell
-                            if (this.mCurrentMap[vP.X, vP.Y] != null && this.mCurrentMap[vP.X, vP.Y].Equals(this.mCurrentTile)) {
-                                //ignore, already set
+
+                            //Pick mode?
+                            if (mPickMode) {
+                                //PICK MODE
+                                mPickMode = false;
+                                btnPick.BackColor = Control.DefaultBackColor; 
+
+                                Tile vCellTile = this.mCurrentMap[vP.X, vP.Y];
+
+                                //tell the lib to change current tile
+                                this.uclibLibrary.SetSelectedTile(vCellTile);
                             }
                             else {
-                                //set and repaint
-                                this.mCurrentMap.SetTile(this.mCurrentTile, vP.X, vP.Y);
-                                this.panMap.Invalidate();
+                                //REGULAR PAINT cell by cell
+                                if (this.mCurrentMap[vP.X, vP.Y] != null && this.mCurrentMap[vP.X, vP.Y].Equals(this.mCurrentTile)) {
+                                    //ignore, already set
+                                }
+                                else {
+                                    //set and repaint
+                                    this.mCurrentMap.SetTile(this.mCurrentTile, vP.X, vP.Y);
+                                    this.panMap.Invalidate();
+                                }
                             }
                         }
                         else {
@@ -371,9 +392,14 @@ namespace GbReaper.Controls {
             }
         }
 
+        private bool mPickMode = false;
         private void btnPick_Click(object sender, EventArgs e) {
-            MessageBox.Show("TODO!");
+            MessageBox.Show("Click on a tile to make it the current one.");
+            mPickMode = true;
+            btnPick.BackColor = Color.Gold;
         }
+
+
 
         private void btnDuplicate_Click(object sender, EventArgs e) {
             this.OnDuplicateMap();
