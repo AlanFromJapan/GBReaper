@@ -311,7 +311,7 @@ namespace GbReaper {
             else
             {
                 this.mCurrentProject.SaveAs(this.mCurrentProject.LatestKnownFilename);
-                SetStatus("Saved as " + this.mCurrentProject.LatestKnownFilename + " completed.");
+                SetStatus("Saved as " + this.mCurrentProject.LatestKnownFilename + " completed at " + DateTime.Now.TimeOfDay.ToString());
             }
         }
 

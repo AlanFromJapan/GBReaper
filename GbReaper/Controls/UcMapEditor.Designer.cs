@@ -26,6 +26,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UcMapEditor));
             this.panMap = new GbReaper.Controls.PanelX();
+            this.scrolVert = new System.Windows.Forms.VScrollBar();
             this.panTools = new System.Windows.Forms.Panel();
             this.btnDuplicate = new System.Windows.Forms.Button();
             this.btnPick = new System.Windows.Forms.Button();
@@ -35,19 +36,30 @@
             this.btnGrid = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.scrolVert = new System.Windows.Forms.VScrollBar();
+            this.lblXY = new System.Windows.Forms.Label();
             this.panMap.SuspendLayout();
             this.panTools.SuspendLayout();
             this.SuspendLayout();
             // 
             // panMap
             // 
+            this.panMap.Controls.Add(this.lblXY);
             this.panMap.Controls.Add(this.scrolVert);
             this.panMap.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panMap.Location = new System.Drawing.Point(32, 0);
             this.panMap.Name = "panMap";
             this.panMap.Size = new System.Drawing.Size(373, 308);
             this.panMap.TabIndex = 0;
+            // 
+            // scrolVert
+            // 
+            this.scrolVert.Dock = System.Windows.Forms.DockStyle.Right;
+            this.scrolVert.Location = new System.Drawing.Point(356, 0);
+            this.scrolVert.Name = "scrolVert";
+            this.scrolVert.Size = new System.Drawing.Size(17, 308);
+            this.scrolVert.TabIndex = 0;
+            this.scrolVert.Value = 50;
+            this.scrolVert.ValueChanged += new System.EventHandler(this.scrolVert_ValueChanged);
             // 
             // panTools
             // 
@@ -153,15 +165,17 @@
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
-            // scrolVert
+            // lblXY
             // 
-            this.scrolVert.Dock = System.Windows.Forms.DockStyle.Right;
-            this.scrolVert.Location = new System.Drawing.Point(356, 0);
-            this.scrolVert.Name = "scrolVert";
-            this.scrolVert.Size = new System.Drawing.Size(17, 308);
-            this.scrolVert.TabIndex = 0;
-            this.scrolVert.Value = 50;
-            this.scrolVert.ValueChanged += new System.EventHandler(this.scrolVert_ValueChanged);
+            this.lblXY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblXY.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblXY.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblXY.Location = new System.Drawing.Point(309, 286);
+            this.lblXY.Name = "lblXY";
+            this.lblXY.Size = new System.Drawing.Size(47, 20);
+            this.lblXY.TabIndex = 1;
+            this.lblXY.Text = "x;y";
+            this.lblXY.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
             // UcMapEditor
             // 
@@ -191,5 +205,6 @@
         private System.Windows.Forms.Button btnPick;
         private System.Windows.Forms.Button btnDuplicate;
         private System.Windows.Forms.VScrollBar scrolVert;
+        private System.Windows.Forms.Label lblXY;
     }
 }

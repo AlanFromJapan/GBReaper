@@ -82,11 +82,35 @@ namespace GbReaper.Controls {
             panMap.Paint += new PaintEventHandler(panMap_Paint);
             panMap.MouseDown += new MouseEventHandler(panMap_MouseDown);
             panMap.MouseMove += new MouseEventHandler(panMap_MouseMove);
+            
         }
 
+
+
         void panMap_MouseMove(object sender, MouseEventArgs e) {
+            //drag n draw
             MousePaintCell(e);
-                        
+
+
+            //update position label
+            if (this.mCurrentMap == null)
+                return;
+
+            Point vMouse = this.PointToClient(MousePosition);
+            vMouse.X -= panTools.Width;
+
+            Rectangle vBorders = GridBorders;
+            if (!vBorders.Contains(vMouse)) {
+                lblXY.Text = string.Empty;
+                return;
+            }
+
+            Point vP = new Point(
+                (vMouse.X - vBorders.X) / TILE_SIZE,
+                (vMouse.Y - vBorders.Y) / TILE_SIZE
+                );
+
+            lblXY.Text = "" + vP.X + ";" + vP.Y;            
         }
 
         public void DeleteTiles(IList<Tile> pTiles) {
