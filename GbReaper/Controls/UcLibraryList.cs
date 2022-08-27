@@ -306,7 +306,7 @@ namespace GbReaper.Controls {
                         return ((TileViewItem)vLVI).mTile;
                     }
                 }
-                if (vLVI == lvLibrary.SelectedItems[0])
+                if (lvLibrary.SelectedItems.Count > 0 && vLVI == lvLibrary.SelectedItems[0])
                     vStartCounting = true;
             }
 

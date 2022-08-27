@@ -85,7 +85,7 @@ namespace GbReaper.Classes {
 
             string vN = this.Name.ToUpper().Trim().Replace(" ", "_");
 
-            return string.Format("#define TILE_{0}   {1}\r\n", vN, pIndex);
+            return string.Format("#define TILE_{0} \t\t((UINT8){1})\r\n", vN, pIndex);
         }
 
 

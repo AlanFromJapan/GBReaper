@@ -418,7 +418,7 @@ namespace GbReaper.Controls {
 
         private bool mPickMode = false;
         private void btnPick_Click(object sender, EventArgs e) {
-            MessageBox.Show("Click on a tile to make it the current one.");
+            //MessageBox.Show("Click on a tile to make it the current one."); >> helper zone below screen is better
             mPickMode = true;
             btnPick.BackColor = Color.Gold;
         }
@@ -426,7 +426,9 @@ namespace GbReaper.Controls {
 
 
         private void btnDuplicate_Click(object sender, EventArgs e) {
-            this.OnDuplicateMap();
+            if (DialogResult.Yes == MessageBox.Show("Are you sure you want to duplicate that map?", "Confirm duplication", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1)) {
+                this.OnDuplicateMap();
+            }
         }
 
         private void scrolVert_ValueChanged(object sender, EventArgs e)

@@ -265,7 +265,10 @@ namespace GbReaper {
        
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e) {
-            Application.Exit();
+            if (DialogResult.Yes == MessageBox.Show("Are you sure you want to quit? Unsaved changes will be lost.", "Confirm quit", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2)) {
+                Application.Exit();
+            }
+            
         }
 
         private void loadToolStripMenuItem_Click(object sender, EventArgs e) {

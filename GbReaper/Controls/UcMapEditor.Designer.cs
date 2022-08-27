@@ -26,6 +26,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UcMapEditor));
             this.panMap = new GbReaper.Controls.PanelX();
+            this.lblXY = new System.Windows.Forms.Label();
             this.scrolVert = new System.Windows.Forms.VScrollBar();
             this.panTools = new System.Windows.Forms.Panel();
             this.btnDuplicate = new System.Windows.Forms.Button();
@@ -36,7 +37,6 @@
             this.btnGrid = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.lblXY = new System.Windows.Forms.Label();
             this.panMap.SuspendLayout();
             this.panTools.SuspendLayout();
             this.SuspendLayout();
@@ -51,6 +51,18 @@
             this.panMap.Size = new System.Drawing.Size(373, 308);
             this.panMap.TabIndex = 0;
             // 
+            // lblXY
+            // 
+            this.lblXY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblXY.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblXY.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblXY.Location = new System.Drawing.Point(309, 286);
+            this.lblXY.Name = "lblXY";
+            this.lblXY.Size = new System.Drawing.Size(47, 20);
+            this.lblXY.TabIndex = 1;
+            this.lblXY.Text = "x;y";
+            this.lblXY.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            // 
             // scrolVert
             // 
             this.scrolVert.Dock = System.Windows.Forms.DockStyle.Right;
@@ -64,13 +76,13 @@
             // panTools
             // 
             this.panTools.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panTools.Controls.Add(this.btnNew);
             this.panTools.Controls.Add(this.btnDuplicate);
             this.panTools.Controls.Add(this.btnPick);
             this.panTools.Controls.Add(this.btnDelete);
             this.panTools.Controls.Add(this.btnFill);
             this.panTools.Controls.Add(this.btnTilizator);
             this.panTools.Controls.Add(this.btnGrid);
-            this.panTools.Controls.Add(this.btnNew);
             this.panTools.Dock = System.Windows.Forms.DockStyle.Left;
             this.panTools.Location = new System.Drawing.Point(0, 0);
             this.panTools.Name = "panTools";
@@ -81,7 +93,7 @@
             // 
             this.btnDuplicate.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btnDuplicate.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDuplicate.Location = new System.Drawing.Point(0, 276);
+            this.btnDuplicate.Location = new System.Drawing.Point(0, 241);
             this.btnDuplicate.Name = "btnDuplicate";
             this.btnDuplicate.Size = new System.Drawing.Size(32, 32);
             this.btnDuplicate.TabIndex = 6;
@@ -92,23 +104,26 @@
             // btnPick
             // 
             this.btnPick.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnPick.Location = new System.Drawing.Point(0, 175);
+            this.btnPick.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPick.Location = new System.Drawing.Point(0, 105);
             this.btnPick.Name = "btnPick";
             this.btnPick.Size = new System.Drawing.Size(32, 35);
             this.btnPick.TabIndex = 5;
-            this.btnPick.Text = "Pick";
+            this.btnPick.Text = "&Pick";
             this.toolTip1.SetToolTip(this.btnPick, "Pick the tile on the map and makes it current tile");
             this.btnPick.UseVisualStyleBackColor = true;
             this.btnPick.Click += new System.EventHandler(this.btnPick_Click);
             // 
             // btnDelete
             // 
-            this.btnDelete.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnDelete.Location = new System.Drawing.Point(0, 140);
+            this.btnDelete.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.Location = new System.Drawing.Point(0, 273);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(32, 35);
             this.btnDelete.TabIndex = 4;
             this.btnDelete.Text = "Del";
+            this.toolTip1.SetToolTip(this.btnDelete, "Deletes the current map");
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
@@ -117,7 +132,7 @@
             this.btnFill.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnFill.Font = new System.Drawing.Font("MS UI Gothic", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnFill.Image = ((System.Drawing.Image)(resources.GetObject("btnFill.Image")));
-            this.btnFill.Location = new System.Drawing.Point(0, 105);
+            this.btnFill.Location = new System.Drawing.Point(0, 70);
             this.btnFill.Name = "btnFill";
             this.btnFill.Size = new System.Drawing.Size(32, 35);
             this.btnFill.TabIndex = 3;
@@ -131,7 +146,7 @@
             this.btnTilizator.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnTilizator.Font = new System.Drawing.Font("MS UI Gothic", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnTilizator.Image = ((System.Drawing.Image)(resources.GetObject("btnTilizator.Image")));
-            this.btnTilizator.Location = new System.Drawing.Point(0, 70);
+            this.btnTilizator.Location = new System.Drawing.Point(0, 35);
             this.btnTilizator.Name = "btnTilizator";
             this.btnTilizator.Size = new System.Drawing.Size(32, 35);
             this.btnTilizator.TabIndex = 2;
@@ -144,7 +159,7 @@
             this.btnGrid.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnGrid.Font = new System.Drawing.Font("MS UI Gothic", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnGrid.Image = ((System.Drawing.Image)(resources.GetObject("btnGrid.Image")));
-            this.btnGrid.Location = new System.Drawing.Point(0, 35);
+            this.btnGrid.Location = new System.Drawing.Point(0, 0);
             this.btnGrid.Name = "btnGrid";
             this.btnGrid.Size = new System.Drawing.Size(32, 35);
             this.btnGrid.TabIndex = 1;
@@ -154,9 +169,9 @@
             // 
             // btnNew
             // 
-            this.btnNew.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnNew.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btnNew.Font = new System.Drawing.Font("MS UI Gothic", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnNew.Location = new System.Drawing.Point(0, 0);
+            this.btnNew.Location = new System.Drawing.Point(0, 206);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(32, 35);
             this.btnNew.TabIndex = 0;
@@ -164,18 +179,6 @@
             this.toolTip1.SetToolTip(this.btnNew, "Add a new map");
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
-            // 
-            // lblXY
-            // 
-            this.lblXY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblXY.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblXY.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblXY.Location = new System.Drawing.Point(309, 286);
-            this.lblXY.Name = "lblXY";
-            this.lblXY.Size = new System.Drawing.Size(47, 20);
-            this.lblXY.TabIndex = 1;
-            this.lblXY.Text = "x;y";
-            this.lblXY.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
             // UcMapEditor
             // 
