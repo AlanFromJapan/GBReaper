@@ -13,10 +13,12 @@ namespace GbReaper.Classes {
 
         public readonly int Width;
         public readonly int Height;
+        protected Tile mEmptyTile;
         private MapBucket[,] mMatrix = null;
         private string mName = null;
         protected GbProject mParentProject = null;
 
+        public Tile EmptyTile { get { return this.mEmptyTile; } set { this.mEmptyTile = value; } }
         public string Name { get { return mName; } set { mName = value; } }
         public GbProject ParentProject {
             get { return this.mParentProject; }
@@ -142,7 +144,7 @@ namespace GbReaper.Classes {
 
 
         internal void SaveToStream(StreamWriter pSW) {
-            pSW.WriteLine(string.Format("\t\t<map name=\"{0}\" width=\"{1}\" height=\"{2}\">", this.Name, this.Width, this.Height));
+            pSW.WriteLine(string.Format("\t\t<map name=\"{0}\" width=\"{1}\" height=\"{2}\" emptyTile=\"{3}\">", this.Name, this.Width, this.Height, this.EmptyTile != null ? this.EmptyTile.UID.ToString() : string.Empty));
 
             for (int y = 0; y < this.Height; y++) {
                 for (int x = 0; x < this.Width; x++) {
@@ -179,12 +181,12 @@ namespace GbReaper.Classes {
 
         }
 
-        internal void ExportToGBDK(string pPath) {
+        internal void ExportToGBDK(string pPath, List<Library> pProjectLibs) {
             string vMapNameC = CleanFileName(this.Name);
             string vFilenameC = Path.Combine(pPath, (string.IsNullOrWhiteSpace(this.Name) ? "GbReaper_map.c" : vMapNameC + ".c"));
 
             //export the C file
-            this.ExportToGBDK_C(vMapNameC, vFilenameC);
+            this.ExportToGBDK_C(vMapNameC, vFilenameC, pProjectLibs);
 
             string vFilenameH = Path.Combine(pPath, (string.IsNullOrWhiteSpace(this.Name) ? "GbReaper_map.c" : vMapNameC + ".h"));
             //export the H file
@@ -200,6 +202,8 @@ namespace GbReaper.Classes {
             using (FileStream vFS = new FileStream(vFilename, FileMode.Create, FileAccess.ReadWrite, FileShare.None)) {
                 using (StreamWriter vSW = new StreamWriter(vFS)) {
                     vSW.WriteLine(string.Format(@"
+#include ""../maps.h""
+
 #ifndef __{2}_H__
 #define __{2}_H__
 
@@ -208,6 +212,8 @@ namespace GbReaper.Classes {
 
 extern const unsigned char {2}[];
 
+extern const struct map map{2};
+
 #endif  //__{2}_H__
 
 ", this.Width, this.Height, vMapNameC));
@@ -215,20 +221,27 @@ extern const unsigned char {2}[];
             }
         }
 
-            /// <summary>
-            /// Makes the C file
-            /// </summary>
-            /// <param name="vMapNameC"></param>
-            /// <param name="vFilename"></param>        
-            protected void ExportToGBDK_C(string vMapNameC, string vFilename) {
+        /// <summary>
+        /// Makes the C file
+        /// </summary>
+        /// <param name="vMapNameC"></param>
+        /// <param name="vFilename"></param>        
+        protected void ExportToGBDK_C(string vMapNameC, string vFilename, List<Library> pProjectLibs) {
 
             using (FileStream vFS = new FileStream(vFilename, FileMode.Create, FileAccess.ReadWrite, FileShare.None)) {
                 using (StreamWriter vSW = new StreamWriter(vFS)) {
                     vSW.WriteLine(string.Format(@"
 
 #include ""{2}.h""
+#include ""../maps.h""
 
 ", this.Width, this.Height, vMapNameC));
+
+                    vSW.WriteLine("// Project libraries");
+                    foreach (Library l in pProjectLibs) {
+                        vSW.WriteLine(string.Format("#include \"{0}.h\"\r\n", l.FileName));
+                    }
+                    vSW.WriteLine("");
 
                     vSW.WriteLine(@"const unsigned char " + vMapNameC + @"[] =
 {
@@ -254,10 +267,18 @@ extern const unsigned char {2}[];
                         vSW.WriteLine("");
                     }
 
-                    vSW.WriteLine(@"
-};
+                    vSW.WriteLine(string.Format(@"
+}};
 
-");
+//Map object declaration
+const struct map map{0} = {{
+    .data = {0},
+    .tilesW = {0}_WIDTH,
+    .tilesH = {0}_HEIGHT,
+    .floorTile = {1}
+}};
+
+", vMapNameC, this.EmptyTile != null ? this.EmptyTile.ConstantNameHFile : "TILE_EMPTY"));
                 }
             }
         }

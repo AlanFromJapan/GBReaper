@@ -22,6 +22,19 @@ namespace GbReaper.Classes {
         public string Name { get { return mName; } set { mName = value; } }
         public Palette Palette { get { return mPalette; } }
 
+        /// <summary>
+        /// Gets the name as is will be in the .h file like TILE_XXXXXX
+        /// </summary>
+        public string ConstantNameHFile {
+            get {
+                if (string.IsNullOrEmpty(this.Name))
+                    return null;
+
+                string vN = this.Name.ToUpper().Trim().Replace(" ", "_");
+
+                return string.Format("TILE_{0}", vN);
+            }
+        }
 
         public delegate void TileChangeDelegate(Tile pTile);
         public event TileChangeDelegate TileChanged;
@@ -83,9 +96,7 @@ namespace GbReaper.Classes {
             if (string.IsNullOrEmpty(this.Name))
                 return null;
 
-            string vN = this.Name.ToUpper().Trim().Replace(" ", "_");
-
-            return string.Format("#define TILE_{0} \t\t((UINT8){1})\r\n", vN, pIndex);
+            return string.Format("#define {0} \t\t((UINT8){1})\r\n", this.ConstantNameHFile, pIndex);
         }
 
 

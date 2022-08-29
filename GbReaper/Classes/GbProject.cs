@@ -50,7 +50,7 @@ namespace GbReaper.Classes {
             }
 
             foreach (Map vM in mMaps) {
-                vM.ExportToGBDK(pPath);
+                vM.ExportToGBDK(pPath, mLibraries);
                 vM.ExportToPNG(pPath, pGridOnMaps);
             }
 
@@ -163,6 +163,10 @@ void main() {{
                             Convert.ToInt32(vNode.Attributes["height"].Value)
                             );
                         vMap.Name = vNode.Attributes["name"].Value;
+                        //if there IS an empty tile
+                        if (vNode.Attributes["emptyTile"] != null && !string.IsNullOrEmpty(vNode.Attributes["emptyTile"].Value)) {
+                            vMap.EmptyTile = vResult.mLibraries[0].GetTileByID(Guid.Parse(vNode.Attributes["emptyTile"].Value));
+                        }
 
                         foreach (XmlNode vNodeCell in vNode.SelectNodes("./cell")) {
                             Guid vG = new Guid(vNodeCell.Attributes["tileID"].Value);

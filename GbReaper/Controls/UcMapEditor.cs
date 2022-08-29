@@ -36,6 +36,9 @@ namespace GbReaper.Controls {
                 }
 
                 this.mCurrentMap = value;
+                if (this.mCurrentMap.EmptyTile != null)
+                    panEmpty.BackgroundImage = this.mCurrentMap.EmptyTile.Image;
+                
 
                 this.mCurrentMap.MapChanged -= new EventHandler(CurrentMap_MapChanged);
                 this.mCurrentMap.MapChanged += new EventHandler(CurrentMap_MapChanged);
@@ -77,7 +80,7 @@ namespace GbReaper.Controls {
         public UcMapEditor(UcLibraryList pLib) {
             InitializeComponent();
 
-            this.uclibLibrary = pLib;
+            this.uclibLibrary = pLib;            
 
             panMap.Paint += new PaintEventHandler(panMap_Paint);
             panMap.MouseDown += new MouseEventHandler(panMap_MouseDown);
@@ -434,6 +437,15 @@ namespace GbReaper.Controls {
         private void scrolVert_ValueChanged(object sender, EventArgs e)
         {
             panMap.Invalidate();
+        }
+
+        private void panEmpty_Click(object sender, EventArgs e) {
+            this.mCurrentMap.EmptyTile = this.mCurrentTile;
+            panEmpty.BackgroundImage = this.mCurrentMap.EmptyTile.Image;
+        }
+
+        private void panEmpty_Paint(object sender, PaintEventArgs e) {
+
         }
     }
 }

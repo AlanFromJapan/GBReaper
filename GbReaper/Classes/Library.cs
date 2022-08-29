@@ -22,6 +22,14 @@ namespace GbReaper.Classes {
         }
 
 
+        /// <summary>
+        /// Gets the h/c filename of this lib WITHOUT extension
+        /// </summary>
+        public string FileName {
+            get {
+                return CleanFileName(this.Name);
+            }
+        }
 
         public event GbReaper.Classes.Tile.TileChangeDelegate TileDeleted;
         public event GbReaper.Classes.Tile.TileChangeDelegate TileAdded;
@@ -179,7 +187,7 @@ namespace GbReaper.Classes {
     
 
         internal void ExportToGBDK(string pPath) {
-            string vLibNameC = CleanFileName(this.Name);
+            string vLibNameC = FileName;
             string vFilename = Path.Combine(pPath, (string.IsNullOrWhiteSpace(this.Name) ? "GbReaper_lib" : vLibNameC ));
 
             //make .c file

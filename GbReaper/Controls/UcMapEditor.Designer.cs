@@ -25,53 +25,23 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UcMapEditor));
-            this.panMap = new GbReaper.Controls.PanelX();
-            this.lblXY = new System.Windows.Forms.Label();
-            this.scrolVert = new System.Windows.Forms.VScrollBar();
             this.panTools = new System.Windows.Forms.Panel();
+            this.btnNew = new System.Windows.Forms.Button();
             this.btnDuplicate = new System.Windows.Forms.Button();
             this.btnPick = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnFill = new System.Windows.Forms.Button();
             this.btnTilizator = new System.Windows.Forms.Button();
             this.btnGrid = new System.Windows.Forms.Button();
-            this.btnNew = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.panMap.SuspendLayout();
+            this.panMap = new GbReaper.Controls.PanelX();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panEmpty = new GbReaper.Controls.PanelX();
+            this.lblXY = new System.Windows.Forms.Label();
+            this.scrolVert = new System.Windows.Forms.VScrollBar();
             this.panTools.SuspendLayout();
+            this.panMap.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // panMap
-            // 
-            this.panMap.Controls.Add(this.lblXY);
-            this.panMap.Controls.Add(this.scrolVert);
-            this.panMap.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panMap.Location = new System.Drawing.Point(32, 0);
-            this.panMap.Name = "panMap";
-            this.panMap.Size = new System.Drawing.Size(373, 308);
-            this.panMap.TabIndex = 0;
-            // 
-            // lblXY
-            // 
-            this.lblXY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblXY.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblXY.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblXY.Location = new System.Drawing.Point(309, 286);
-            this.lblXY.Name = "lblXY";
-            this.lblXY.Size = new System.Drawing.Size(47, 20);
-            this.lblXY.TabIndex = 1;
-            this.lblXY.Text = "x;y";
-            this.lblXY.TextAlign = System.Drawing.ContentAlignment.BottomRight;
-            // 
-            // scrolVert
-            // 
-            this.scrolVert.Dock = System.Windows.Forms.DockStyle.Right;
-            this.scrolVert.Location = new System.Drawing.Point(356, 0);
-            this.scrolVert.Name = "scrolVert";
-            this.scrolVert.Size = new System.Drawing.Size(17, 308);
-            this.scrolVert.TabIndex = 0;
-            this.scrolVert.Value = 50;
-            this.scrolVert.ValueChanged += new System.EventHandler(this.scrolVert_ValueChanged);
             // 
             // panTools
             // 
@@ -88,6 +58,19 @@
             this.panTools.Name = "panTools";
             this.panTools.Size = new System.Drawing.Size(32, 308);
             this.panTools.TabIndex = 1;
+            // 
+            // btnNew
+            // 
+            this.btnNew.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnNew.Font = new System.Drawing.Font("MS UI Gothic", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnNew.Location = new System.Drawing.Point(0, 206);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(32, 35);
+            this.btnNew.TabIndex = 0;
+            this.btnNew.Text = "New";
+            this.toolTip1.SetToolTip(this.btnNew, "Add a new map");
+            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // btnDuplicate
             // 
@@ -167,18 +150,60 @@
             this.btnGrid.UseVisualStyleBackColor = true;
             this.btnGrid.Click += new System.EventHandler(this.btnGrid_Click);
             // 
-            // btnNew
+            // panMap
             // 
-            this.btnNew.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnNew.Font = new System.Drawing.Font("MS UI Gothic", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnNew.Location = new System.Drawing.Point(0, 206);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(32, 35);
-            this.btnNew.TabIndex = 0;
-            this.btnNew.Text = "New";
-            this.toolTip1.SetToolTip(this.btnNew, "Add a new map");
-            this.btnNew.UseVisualStyleBackColor = true;
-            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            this.panMap.Controls.Add(this.label1);
+            this.panMap.Controls.Add(this.panEmpty);
+            this.panMap.Controls.Add(this.lblXY);
+            this.panMap.Controls.Add(this.scrolVert);
+            this.panMap.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panMap.Location = new System.Drawing.Point(32, 0);
+            this.panMap.Name = "panMap";
+            this.panMap.Size = new System.Drawing.Size(373, 308);
+            this.panMap.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label1.Location = new System.Drawing.Point(0, 38);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(58, 20);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Empty tile";
+            // 
+            // panEmpty
+            // 
+            this.panEmpty.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panEmpty.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panEmpty.Location = new System.Drawing.Point(3, 3);
+            this.panEmpty.Name = "panEmpty";
+            this.panEmpty.Size = new System.Drawing.Size(32, 32);
+            this.panEmpty.TabIndex = 4;
+            this.panEmpty.Click += new System.EventHandler(this.panEmpty_Click);
+            this.panEmpty.Paint += new System.Windows.Forms.PaintEventHandler(this.panEmpty_Paint);
+            // 
+            // lblXY
+            // 
+            this.lblXY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblXY.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblXY.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.lblXY.Location = new System.Drawing.Point(309, 286);
+            this.lblXY.Name = "lblXY";
+            this.lblXY.Size = new System.Drawing.Size(47, 20);
+            this.lblXY.TabIndex = 1;
+            this.lblXY.Text = "x;y";
+            this.lblXY.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            // 
+            // scrolVert
+            // 
+            this.scrolVert.Dock = System.Windows.Forms.DockStyle.Right;
+            this.scrolVert.Location = new System.Drawing.Point(356, 0);
+            this.scrolVert.Name = "scrolVert";
+            this.scrolVert.Size = new System.Drawing.Size(17, 308);
+            this.scrolVert.TabIndex = 0;
+            this.scrolVert.Value = 50;
+            this.scrolVert.ValueChanged += new System.EventHandler(this.scrolVert_ValueChanged);
             // 
             // UcMapEditor
             // 
@@ -189,8 +214,8 @@
             this.DoubleBuffered = true;
             this.Name = "UcMapEditor";
             this.Size = new System.Drawing.Size(405, 308);
-            this.panMap.ResumeLayout(false);
             this.panTools.ResumeLayout(false);
+            this.panMap.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -209,5 +234,7 @@
         private System.Windows.Forms.Button btnDuplicate;
         private System.Windows.Forms.VScrollBar scrolVert;
         private System.Windows.Forms.Label lblXY;
+        private PanelX panEmpty;
+        private System.Windows.Forms.Label label1;
     }
 }
