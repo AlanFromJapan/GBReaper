@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Xml;
+using System.Drawing;
 
 namespace GbReaper.Classes {
     public class GbProject {
@@ -166,6 +167,11 @@ void main() {{
                         //if there IS an empty tile
                         if (vNode.Attributes["emptyTile"] != null && !string.IsNullOrEmpty(vNode.Attributes["emptyTile"].Value)) {
                             vMap.EmptyTile = vResult.mLibraries[0].GetTileByID(Guid.Parse(vNode.Attributes["emptyTile"].Value));
+                        }
+                        //if there IS a start position
+                        if (vNode.Attributes["startX"] != null && !string.IsNullOrEmpty(vNode.Attributes["startX"].Value)) {
+                            Point p = new Point(Int32.Parse(vNode.Attributes["startX"].Value), Int32.Parse(vNode.Attributes["startY"].Value));
+                            vMap.PlayerStart = p;
                         }
 
                         foreach (XmlNode vNodeCell in vNode.SelectNodes("./cell")) {

@@ -39,6 +39,7 @@
             this.panEmpty = new GbReaper.Controls.PanelX();
             this.lblXY = new System.Windows.Forms.Label();
             this.scrolVert = new System.Windows.Forms.VScrollBar();
+            this.btnSetStart = new System.Windows.Forms.Button();
             this.panTools.SuspendLayout();
             this.panMap.SuspendLayout();
             this.SuspendLayout();
@@ -46,6 +47,7 @@
             // panTools
             // 
             this.panTools.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panTools.Controls.Add(this.btnSetStart);
             this.panTools.Controls.Add(this.btnNew);
             this.panTools.Controls.Add(this.btnDuplicate);
             this.panTools.Controls.Add(this.btnPick);
@@ -56,14 +58,14 @@
             this.panTools.Dock = System.Windows.Forms.DockStyle.Left;
             this.panTools.Location = new System.Drawing.Point(0, 0);
             this.panTools.Name = "panTools";
-            this.panTools.Size = new System.Drawing.Size(32, 308);
+            this.panTools.Size = new System.Drawing.Size(32, 373);
             this.panTools.TabIndex = 1;
             // 
             // btnNew
             // 
             this.btnNew.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btnNew.Font = new System.Drawing.Font("MS UI Gothic", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnNew.Location = new System.Drawing.Point(0, 206);
+            this.btnNew.Location = new System.Drawing.Point(0, 271);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(32, 35);
             this.btnNew.TabIndex = 0;
@@ -76,7 +78,7 @@
             // 
             this.btnDuplicate.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btnDuplicate.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDuplicate.Location = new System.Drawing.Point(0, 241);
+            this.btnDuplicate.Location = new System.Drawing.Point(0, 306);
             this.btnDuplicate.Name = "btnDuplicate";
             this.btnDuplicate.Size = new System.Drawing.Size(32, 32);
             this.btnDuplicate.TabIndex = 6;
@@ -101,7 +103,7 @@
             // 
             this.btnDelete.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(0, 273);
+            this.btnDelete.Location = new System.Drawing.Point(0, 338);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(32, 35);
             this.btnDelete.TabIndex = 4;
@@ -159,7 +161,7 @@
             this.panMap.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panMap.Location = new System.Drawing.Point(32, 0);
             this.panMap.Name = "panMap";
-            this.panMap.Size = new System.Drawing.Size(373, 308);
+            this.panMap.Size = new System.Drawing.Size(400, 373);
             this.panMap.TabIndex = 0;
             // 
             // label1
@@ -188,7 +190,7 @@
             this.lblXY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblXY.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblXY.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblXY.Location = new System.Drawing.Point(309, 286);
+            this.lblXY.Location = new System.Drawing.Point(336, 351);
             this.lblXY.Name = "lblXY";
             this.lblXY.Size = new System.Drawing.Size(47, 20);
             this.lblXY.TabIndex = 1;
@@ -198,12 +200,25 @@
             // scrolVert
             // 
             this.scrolVert.Dock = System.Windows.Forms.DockStyle.Right;
-            this.scrolVert.Location = new System.Drawing.Point(356, 0);
+            this.scrolVert.Location = new System.Drawing.Point(383, 0);
             this.scrolVert.Name = "scrolVert";
-            this.scrolVert.Size = new System.Drawing.Size(17, 308);
+            this.scrolVert.Size = new System.Drawing.Size(17, 373);
             this.scrolVert.TabIndex = 0;
             this.scrolVert.Value = 50;
             this.scrolVert.ValueChanged += new System.EventHandler(this.scrolVert_ValueChanged);
+            // 
+            // btnSetStart
+            // 
+            this.btnSetStart.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSetStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSetStart.Location = new System.Drawing.Point(0, 140);
+            this.btnSetStart.Name = "btnSetStart";
+            this.btnSetStart.Size = new System.Drawing.Size(32, 35);
+            this.btnSetStart.TabIndex = 7;
+            this.btnSetStart.Text = "&Start";
+            this.toolTip1.SetToolTip(this.btnSetStart, "Pick the tile on the map and makes it current tile");
+            this.btnSetStart.UseVisualStyleBackColor = true;
+            this.btnSetStart.Click += new System.EventHandler(this.btnSetStart_Click);
             // 
             // UcMapEditor
             // 
@@ -213,7 +228,7 @@
             this.Controls.Add(this.panTools);
             this.DoubleBuffered = true;
             this.Name = "UcMapEditor";
-            this.Size = new System.Drawing.Size(405, 308);
+            this.Size = new System.Drawing.Size(432, 373);
             this.panTools.ResumeLayout(false);
             this.panMap.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -236,5 +251,6 @@
         private System.Windows.Forms.Label lblXY;
         private PanelX panEmpty;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnSetStart;
     }
 }

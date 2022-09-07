@@ -130,13 +130,10 @@
         RK5CYII=
 </value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="btnTilizator.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAAAd0SU1FB+QDEAwsJS2XmPYAAACeSURBVDhPYxg04CoQ/ycRg/TAAUiAE8IkCnAD
+        DAAACwwBP0AiyAAAAAd0SU1FB+QDEAwsJS2XmPYAAACeSURBVDhPYxg04CoQ/ycRg/TAAUiAE8IkCnAD
         MUgPHKBwcIBuIP4BpZmAmGQDQJpB6kA0QQNATiwEYmRvEe0CkOQaIAaJbQJiFiBGB3gNaAJiEB+GlwBx
         MhC/AmJbIAYBRiDGakA4EP8DYmQDkPEHIDYAYqwGmADxNygbH34BxGpQNhyAOE+gNDH4AZSGA3QFxGI4
         ICcpXwHiAQcMDAB1jmkztkcjBgAAAABJRU5ErkJggg==

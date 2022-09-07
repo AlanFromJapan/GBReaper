@@ -17,6 +17,7 @@ namespace GbReaper.Classes {
         private MapBucket[,] mMatrix = null;
         private string mName = null;
         protected GbProject mParentProject = null;
+        protected Point mPlayerStart = new Point(0, 0);
 
         public Tile EmptyTile { get { return this.mEmptyTile; } set { this.mEmptyTile = value; } }
         public string Name { get { return mName; } set { mName = value; } }
@@ -34,6 +35,12 @@ namespace GbReaper.Classes {
                     this.mMatrix[x, y].mTile);
             }
         }
+
+        public Point PlayerStart {
+            get { return this.mPlayerStart;  }
+            set { this.mPlayerStart = value; }
+        }
+
 
         public Map(int pW, int pH) {
             this.Width = pW;
@@ -144,7 +151,7 @@ namespace GbReaper.Classes {
 
 
         internal void SaveToStream(StreamWriter pSW) {
-            pSW.WriteLine(string.Format("\t\t<map name=\"{0}\" width=\"{1}\" height=\"{2}\" emptyTile=\"{3}\">", this.Name, this.Width, this.Height, this.EmptyTile != null ? this.EmptyTile.UID.ToString() : string.Empty));
+            pSW.WriteLine(string.Format("\t\t<map name=\"{0}\" width=\"{1}\" height=\"{2}\" emptyTile=\"{3}\" startX=\"{4}\" startY=\"{5}\" >", this.Name, this.Width, this.Height, this.EmptyTile != null ? this.EmptyTile.UID.ToString() : string.Empty, this.mPlayerStart.X, this.mPlayerStart.Y));
 
             for (int y = 0; y < this.Height; y++) {
                 for (int x = 0; x < this.Width; x++) {
@@ -275,10 +282,12 @@ const struct map map{0} = {{
     .data = {0},
     .tilesW = {0}_WIDTH,
     .tilesH = {0}_HEIGHT,
-    .floorTile = {1}
+    .floorTile = {1},
+    .heroStartX = {2},
+    .heroStartY = {3}
 }};
 
-", vMapNameC, this.EmptyTile != null ? this.EmptyTile.ConstantNameHFile : "TILE_EMPTY"));
+", vMapNameC, this.EmptyTile != null ? this.EmptyTile.ConstantNameHFile : "TILE_EMPTY", this.mPlayerStart.X, this.mPlayerStart.Y));
                 }
             }
         }

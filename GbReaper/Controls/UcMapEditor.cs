@@ -172,14 +172,27 @@ namespace GbReaper.Controls {
                                 this.uclibLibrary.SetSelectedTile(vCellTile);
                             }
                             else {
-                                //REGULAR PAINT cell by cell
-                                if (this.mCurrentMap[vP.X, vP.Y] != null && this.mCurrentMap[vP.X, vP.Y].Equals(this.mCurrentTile)) {
-                                    //ignore, already set
+                                //Set start mode?
+                                if (mSetStartMode) {
+                                    //Do NOT reset, it's a toggle otherwise you might switch to paint mode and overwrite the tiles below
+
+                                    Point vStartPoint = new Point(
+                                        (e.X - vBorders.X) / TILE_ZOOM_FACTOR,
+                                        (e.Y - vBorders.Y) / TILE_ZOOM_FACTOR
+                                        );
+                                    mCurrentMap.PlayerStart = vStartPoint;
+                                    this.panMap.Invalidate();
                                 }
                                 else {
-                                    //set and repaint
-                                    this.mCurrentMap.SetTile(this.mCurrentTile, vP.X, vP.Y);
-                                    this.panMap.Invalidate();
+                                    //REGULAR PAINT cell by cell
+                                    if (this.mCurrentMap[vP.X, vP.Y] != null && this.mCurrentMap[vP.X, vP.Y].Equals(this.mCurrentTile)) {
+                                        //ignore, already set
+                                    }
+                                    else {
+                                        //set and repaint
+                                        this.mCurrentMap.SetTile(this.mCurrentTile, vP.X, vP.Y);
+                                        this.panMap.Invalidate();
+                                    }
                                 }
                             }
                         }
@@ -288,6 +301,14 @@ namespace GbReaper.Controls {
             if (mGridMode == GridMode.Foreground) {
                 DrawingLogic.DrawGrid(e.Graphics, vBorders, Pens.DarkRed, this.mCurrentMap.Width, this.mCurrentMap.Height);
             }
+
+            //Draw start position
+            Rectangle vStart = new Rectangle(
+                vBorders.X + (-8 + mCurrentMap.PlayerStart.X) * TILE_ZOOM_FACTOR,
+                vBorders.Y + (-16 + mCurrentMap.PlayerStart.Y) * TILE_ZOOM_FACTOR,
+                16 * TILE_ZOOM_FACTOR,
+                16 * TILE_ZOOM_FACTOR);
+            e.Graphics.DrawRectangle(Pens.Red, vStart);
 
         }
 
@@ -422,8 +443,14 @@ namespace GbReaper.Controls {
         private bool mPickMode = false;
         private void btnPick_Click(object sender, EventArgs e) {
             //MessageBox.Show("Click on a tile to make it the current one."); >> helper zone below screen is better
-            mPickMode = true;
-            btnPick.BackColor = Color.Gold;
+            mPickMode = !mPickMode;
+
+            if (mSetStartMode) {
+                btnPick.BackColor = Color.Gold;
+            }
+            else {
+                btnPick.BackColor = Control.DefaultBackColor;
+            }
         }
 
 
@@ -446,6 +473,18 @@ namespace GbReaper.Controls {
 
         private void panEmpty_Paint(object sender, PaintEventArgs e) {
 
+        }
+
+        private bool mSetStartMode = false;
+        private void btnSetStart_Click(object sender, EventArgs e) {
+            mSetStartMode = !mSetStartMode;
+
+            if (mSetStartMode) {
+                btnSetStart.BackColor = Color.Gold;
+            }
+            else {
+                btnSetStart.BackColor = Control.DefaultBackColor;
+            }
         }
     }
 }
